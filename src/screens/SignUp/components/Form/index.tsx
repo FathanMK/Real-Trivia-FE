@@ -7,7 +7,9 @@ import MainButton from '../../../../components/Buttons/Main';
 import {SignUpContext} from '../../providers';
 
 export default function Form() {
-  const {control, handleSubmit, onSubmit} = useContext(SignUpContext);
+  const {control, handleSubmit, onSubmit, isLoading} =
+    useContext(SignUpContext);
+
   return (
     <>
       <ScrollView>
@@ -24,6 +26,7 @@ export default function Form() {
       </ScrollView>
       <View style={{marginTop: 24, marginHorizontal: 16, marginBottom: 16}}>
         <MainButton
+          isLoading={isLoading}
           variant="primary"
           width="100%"
           onPress={handleSubmit(onSubmit)}>
