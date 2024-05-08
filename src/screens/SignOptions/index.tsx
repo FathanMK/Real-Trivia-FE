@@ -7,7 +7,7 @@ import MainButton from '../../components/Buttons/MainButton';
 import useAppSelector from '../../hooks/useAppSelector';
 import { useLoginUserMutation } from '../../stores/services/user';
 
-export default function SignOptionsPage() {
+export default function SignOptionsScreen() {
   const navigation = useNavigation();
   const { username, password } = useAppSelector((state) => state.savedUser)
   const [loginUser, { isLoading }] = useLoginUserMutation()

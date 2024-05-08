@@ -6,7 +6,7 @@ import BackButton from '../../components/Buttons/BackButton';
 import Form from './components/Form';
 import SignUpProvider from './providers';
 
-export default function SignUpPage() {
+export default function SignUpScreen() {
   return (
     <Container style={{flex: 1}}>
       <View

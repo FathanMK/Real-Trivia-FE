@@ -1,21 +1,35 @@
-import { Image, ToastAndroid, View } from "react-native";
+import { ActivityIndicator, Image, ToastAndroid, View } from "react-native";
 import { LogOut } from "lucide-react-native";
+import Text from "../../../Text";
+import IconButton from "../../../../Buttons/Icon";
+import colors from "../../../../../styles/colors";
+import useAppDispatch from "../../../../../hooks/useAppDispatch";
+import { removeToken } from "../../../../../stores/slices/user";
+import useTheme from "../../../../../hooks/useTheme";
+import { useGetUserByIdQuery } from "../../../../../stores/services/user";
 
-import Text from "../../../../components/Layouts/Text";
-import IconButton from "../../../../components/Buttons/Icon";
-import colors from "../../../../styles/colors";
-import useAppDispatch from "../../../../hooks/useAppDispatch";
-import { removeToken } from "../../../../stores/slices/user";
-import useTheme from "../../../../hooks/useTheme";
-
-export default function ProfileCard() {
+export default function PlayerCard() {
   const dispatch = useAppDispatch()
   const { isLight } = useTheme()
+  //@ts-ignore
+  const { data, isLoading } = useGetUserByIdQuery()
 
   function handleLogOut() {
     ToastAndroid.show("Logged Out!", ToastAndroid.SHORT)
     dispatch(removeToken())
   }
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1 }}>
+        <ActivityIndicator />
+      </View>
+    )
+  }
+
+  //@ts-ignore
+  const { user } = data
+
   return (
     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", flex: 1 }}>
       <View style={{ flexDirection: "row", alignItems: "flex-start", gap: 8 }}>
@@ -23,8 +37,8 @@ export default function ProfileCard() {
           <Image style={{ width: "100%", height: "100%", borderRadius: 4, borderWidth: 2, borderColor: isLight ? colors.dark() : colors.light() }} src="https://res.cloudinary.com/dts5hyzdq/image/upload/v1698223958/vfygy9mtsax2i7zehkyl.jpg" />
         </View>
         <View style={{ width: 155 }}>
-          <Text weight={900} style={{ fontSize: 16, marginTop: -4 }}>extenderp</Text>
-          <Text weight={500} style={{ fontSize: 12, marginTop: -4 }}>level 0</Text>
+          <Text weight={900} style={{ fontSize: 16, marginTop: -4 }}>{user?.username}</Text>
+          <Text weight={500} style={{ fontSize: 12, marginTop: -4 }}>level {user?.level}</Text>
           <View style={{ height: 10, width: "100%", borderRadius: 5, borderWidth: 2, borderColor: isLight ? colors.dark() : colors.light(), marginTop: 8 }} />
         </View>
       </View>

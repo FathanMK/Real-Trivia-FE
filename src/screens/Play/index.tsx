@@ -3,27 +3,17 @@ import { View } from "react-native";
 import Container from "../../components/Layouts/Container";
 import MainButton from "../../components/Buttons/MainButton";
 import Header from "../../components/Layouts/Header";
-import { useNavigation } from "@react-navigation/native";
 
-export default function HomeScreen() {
-  const navigation = useNavigation()
-
-  function handleToPlay() {
-    navigation.navigate("Play")
-  }
-
+export default function PlayScreen() {
   return (
     <Container style={{ flex: 1 }}>
       <Header />
       <View style={{ flex: 1, marginHorizontal: 16, alignItems: "center", justifyContent: "center", gap: 20 }}>
-        <MainButton variant="primary" width="100%" onPress={handleToPlay}>
-          Play
+        <MainButton variant="primary" width="100%">
+          Play against Bots
         </MainButton>
         <MainButton variant="primary" width="100%">
-          Compendium
-        </MainButton>
-        <MainButton variant="primary" width="100%">
-          Settings
+          Play against Players
         </MainButton>
       </View>
     </Container>

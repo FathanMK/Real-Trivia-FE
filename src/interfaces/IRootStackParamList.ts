@@ -3,4 +3,5 @@ export interface IRootStackParamList {
   SignUp: undefined;
   Login: undefined;
   Home: undefined;
+  Play: undefined;
 }

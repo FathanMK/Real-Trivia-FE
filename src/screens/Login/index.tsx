@@ -6,7 +6,7 @@ import ThemeToggle from '../../components/Buttons/ThemeToggle';
 import LoginProvider from './providers';
 import Form from './components/Form';
 
-export default function LoginPage() {
+export default function LoginScreen() {
   return (
     <Container style={{ flex: 1 }}>
       <View
