@@ -1,4 +1,5 @@
-import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { userApi } from '../../services/user';
 
 interface IInitialState {
   token: string;
@@ -12,12 +13,20 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    removeToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
+    removeToken: (state) => {
+      state.token = "";
     },
+  },
+  extraReducers(builder) {
+    builder.addMatcher(
+      userApi.endpoints.loginUser.matchFulfilled,
+      (state, { payload }) => {
+        state.token = payload.token!
+      }
+    )
   },
 });
 
-export const {removeToken} = userSlice.actions;
+export const { removeToken } = userSlice.actions;
 
 export default userSlice.reducer;

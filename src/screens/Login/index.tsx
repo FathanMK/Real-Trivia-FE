@@ -1,14 +1,14 @@
-import {View} from 'react-native';
+import { View } from 'react-native';
 
 import Container from '../../components/Layouts/Container';
-import ThemeToggle from '../../components/Buttons/ThemeToggle';
 import BackButton from '../../components/Buttons/BackButton';
+import ThemeToggle from '../../components/Buttons/ThemeToggle';
+import LoginProvider from './providers';
 import Form from './components/Form';
-import SignUpProvider from './providers';
 
-export default function SignUpPage() {
+export default function LoginPage() {
   return (
-    <Container style={{flex: 1}}>
+    <Container style={{ flex: 1 }}>
       <View
         style={{
           marginTop: 16,
@@ -21,9 +21,9 @@ export default function SignUpPage() {
         <BackButton />
         <ThemeToggle />
       </View>
-      <SignUpProvider>
+      <LoginProvider>
         <Form />
-      </SignUpProvider>
+      </LoginProvider>
     </Container>
   );
 }

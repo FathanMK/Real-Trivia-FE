@@ -1,11 +1,12 @@
-import {Pressable} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { ArrowLeft } from 'lucide-react-native';
+
 import useTheme from '../../../hooks/useTheme';
 import colors from '../../../styles/colors';
-import {useNavigation} from '@react-navigation/native';
-import {ArrowLeft} from 'lucide-react-native';
+import IconButton from '../Icon';
 
 export default function BackButton() {
-  const {isLight} = useTheme();
+  const { isLight } = useTheme();
   const navigation = useNavigation();
 
   function handleBack() {
@@ -13,18 +14,8 @@ export default function BackButton() {
   }
 
   return (
-    <Pressable
-      style={{
-        height: 40,
-        width: 40,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}
-      android_ripple={{
-        color: isLight ? colors.light('0.15') : colors.dark('0.15'),
-      }}
-      onPress={handleBack}>
+    <IconButton onPress={handleBack} variant="secondary">
       <ArrowLeft color={isLight ? colors.dark() : colors.light()} size={22} />
-    </Pressable>
+    </IconButton>
   );
 }
