@@ -7,6 +7,7 @@ import SignUpScreen from '../../screens/SignUp';
 import LoginScreen from '../../screens/Login';
 import PlayScreen from '../../screens/Play';
 import LoadingScreen from '../../screens/Loading';
+import AgainstBotScreen from '../../screens/Play/AgainstBot';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export default function Navigation() {
           <>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Play" component={PlayScreen} />
+            <Stack.Screen name="AgainstBot" component={AgainstBotScreen} />
           </> :
           <>
             <Stack.Screen name="SignOptions" component={SignOptionsScreen} />
