@@ -1,5 +1,5 @@
 import type { LoginRequest, RegisterRequest } from './interfaces/Request';
-import { GetUserByIdResponse, type LoginResponse, type RegisterResponse } from './interfaces/Response';
+import type { CheckTokenResponse, GetUserByIdResponse, LoginResponse, RegisterResponse } from './interfaces/Response';
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -34,8 +34,14 @@ export const userApi = createApi({
         url: "/user",
         method: "GET",
       })
+    }),
+    checkToken: builder.query<CheckTokenResponse, void>({
+      query: () => ({
+        url: "/user/checkToken",
+        method: "GET"
+      })
     })
   }),
 });
 
-export const { useRegisterUserMutation, useLoginUserMutation, useGetUserByIdQuery } = userApi;
+export const { useRegisterUserMutation, useLoginUserMutation, useGetUserByIdQuery, useCheckTokenQuery } = userApi;

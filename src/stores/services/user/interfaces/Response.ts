@@ -12,3 +12,8 @@ export interface LoginResponse {
 export interface GetUserByIdResponse {
   user?: IUser
 }
+
+export interface CheckTokenResponse {
+  token?: string;
+  valid?: boolean
+}

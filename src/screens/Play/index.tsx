@@ -4,12 +4,14 @@ import Container from "../../components/Layouts/Container";
 import MainButton from "../../components/Buttons/MainButton";
 import Header from "../../components/Layouts/Header";
 import { useNavigation } from "@react-navigation/native";
+import socket from "../../lib/socket";
 
 export default function PlayScreen() {
   const navigation = useNavigation()
 
   function handleAgainstBot() {
     navigation.navigate("AgainstBot")
+    socket.emit("clientInit")
   }
 
   return (

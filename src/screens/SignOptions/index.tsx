@@ -33,10 +33,11 @@ export default function SignOptionsScreen() {
             Continue as {username}
           </MainButton>
         }
-        <MainButton variant="primary" width="100%" onPress={() => navigation.navigate('Login')}>
+        <MainButton isLoading={isLoading} variant="primary" width="100%" onPress={() => navigation.navigate('Login')}>
           Login
         </MainButton>
         <MainButton
+          isLoading={isLoading}
           variant="secondary"
           width="100%"
           onPress={() => navigation.navigate('SignUp')}>

@@ -3,12 +3,10 @@ import { userApi } from '../../services/user';
 
 interface IInitialState {
   token: string;
-  isLoading: boolean
 }
 
 const initialState: IInitialState = {
   token: '',
-  isLoading: false
 };
 
 const userSlice = createSlice({
@@ -24,9 +22,14 @@ const userSlice = createSlice({
       userApi.endpoints.loginUser.matchFulfilled,
       (state, { payload }) => {
         state.token = payload.token!
-        state.isLoading = true
       }
-    )
+    ),
+      builder.addMatcher(
+        userApi.endpoints.checkToken.matchFulfilled,
+        (state, { payload }) => {
+          state.token = payload.token!
+        }
+      )
   },
 });
 

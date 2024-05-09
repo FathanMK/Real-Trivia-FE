@@ -11,7 +11,6 @@ import { useGetUserByIdQuery } from "../../../../../stores/services/user";
 export default function PlayerCard() {
   const dispatch = useAppDispatch()
   const { isLight } = useTheme()
-  //@ts-ignore
   const { data, isLoading } = useGetUserByIdQuery()
 
   function handleLogOut() {
