@@ -1,9 +1,10 @@
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
+import PlayersOnline from "../../components/PlayersOnline";
 import Container from "../../components/Layouts/Container";
 import MainButton from "../../components/Buttons/MainButton";
 import Header from "../../components/Layouts/Header";
-import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
   const navigation = useNavigation()
@@ -26,6 +27,7 @@ export default function HomeScreen() {
           Settings
         </MainButton>
       </View>
+      <PlayersOnline />
     </Container>
   )
 }

@@ -16,6 +16,7 @@ import themeReducer from './slices/theme';
 import savedUserReducer from './slices/savedUser';
 
 import { userApi } from './services/user';
+import { matchApi } from './services/match';
 
 const persistConfig = {
   key: 'root',
@@ -27,6 +28,7 @@ const rootReducers = combineReducers({
   theme: themeReducer,
   savedUser: savedUserReducer,
   [userApi.reducerPath]: userApi.reducer,
+  [matchApi.reducerPath]: matchApi.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);
@@ -38,7 +40,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(userApi.middleware),
+    }).concat(userApi.middleware, matchApi.middleware),
 });
 
 export const persistor = persistStore(store);

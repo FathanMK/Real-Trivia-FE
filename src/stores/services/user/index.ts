@@ -13,7 +13,7 @@ export const userApi = createApi({
     }
   }),
   reducerPath: 'userApi',
-  tagTypes: ['User'],
+  tagTypes: ["User"],
   endpoints: builder => ({
     registerUser: builder.mutation<RegisterResponse, RegisterRequest>({
       query: body => ({
@@ -28,20 +28,30 @@ export const userApi = createApi({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ["User"]
     }),
     getUserById: builder.query<GetUserByIdResponse, void>({
       query: () => ({
         url: "/user",
         method: "GET",
-      })
+      }),
+      providesTags: ["User"]
     }),
     checkToken: builder.query<CheckTokenResponse, void>({
       query: () => ({
         url: "/user/checkToken",
         method: "GET"
       })
-    })
+    }),
+    updateUser: builder.mutation<any, any>({
+      query: body => ({
+        url: '/user/update',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ["User"]
+    }),
   }),
 });
 
-export const { useRegisterUserMutation, useLoginUserMutation, useGetUserByIdQuery, useCheckTokenQuery } = userApi;
+export const { useRegisterUserMutation, useLoginUserMutation, useGetUserByIdQuery, useCheckTokenQuery, useUpdateUserMutation } = userApi;

@@ -1,17 +1,25 @@
 import { View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Container from "../../components/Layouts/Container";
 import MainButton from "../../components/Buttons/MainButton";
 import Header from "../../components/Layouts/Header";
-import { useNavigation } from "@react-navigation/native";
 import socket from "../../lib/socket";
+import { useGetUserByIdQuery } from "../../stores/services/user";
+import PlayersOnline from "../../components/PlayersOnline";
 
 export default function PlayScreen() {
   const navigation = useNavigation()
+  const { data } = useGetUserByIdQuery()
 
   function handleAgainstBot() {
     navigation.navigate("AgainstBot")
-    socket.emit("clientInit")
+    socket.emit("play game", { type: "AGAINST BOT", user: data?.user })
+  }
+
+  function handleAgainstPlayer() {
+    navigation.navigate("AgainstPlayer")
+    socket.emit("play game", { type: "AGAINST PLAYER", user: data?.user })
   }
 
   return (
@@ -21,10 +29,11 @@ export default function PlayScreen() {
         <MainButton variant="primary" width="100%" onPress={handleAgainstBot}>
           Play against Bots
         </MainButton>
-        <MainButton variant="primary" width="100%">
+        <MainButton variant="primary" width="100%" onPress={handleAgainstPlayer}>
           Play against Players
         </MainButton>
       </View>
+      <PlayersOnline />
     </Container>
   )
 }

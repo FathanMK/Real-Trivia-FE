@@ -1,5 +1,5 @@
-import {ReactNode} from 'react';
-import {ActivityIndicator, DimensionValue, Pressable} from 'react-native';
+import { ReactNode } from 'react';
+import { ActivityIndicator, DimensionValue, StyleProp, ViewStyle, Pressable } from 'react-native';
 
 import colors from '../../../styles/colors';
 import useTheme from '../../../hooks/useTheme';
@@ -11,6 +11,7 @@ interface Props {
   variant?: 'primary' | 'secondary';
   onPress?: () => void;
   isLoading?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default function MainButton({
@@ -18,37 +19,43 @@ export default function MainButton({
   width,
   variant,
   isLoading,
+  style,
   onPress,
 }: Props) {
-  const {isLight} = useTheme();
+
+  const { isLight } = useTheme();
+  const styles = {
+    backgroundColor:
+      variant === 'primary'
+        ? isLight
+          ? colors.dark()
+          : colors.light()
+        : 'transparent',
+    width,
+    borderWidth: variant === 'secondary' ? 2 : 0,
+    borderColor:
+      variant === 'secondary'
+        ? isLight
+          ? colors.dark()
+          : colors.light()
+        : 'transparent',
+    padding: 8,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 'auto',
+    borderRadius: 10,
+    opacity: isLoading ? 0.75 : 1,
+    //@ts-ignore
+    ...style
+  }
+
   return (
     <Pressable
       disabled={isLoading}
-      style={{
-        backgroundColor:
-          variant === 'primary'
-            ? isLight
-              ? colors.dark()
-              : colors.light()
-            : 'transparent',
-        width,
-        borderWidth: variant === 'secondary' ? 2 : 0,
-        borderColor:
-          variant === 'secondary'
-            ? isLight
-              ? colors.dark()
-              : colors.light()
-            : 'transparent',
-        padding: 8,
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginHorizontal: 'auto',
-        borderRadius: 10,
-        opacity: isLoading ? 0.75 : 1,
-      }}
+      style={styles}
       android_ripple={{
-        color: isLight ? colors.light('0.15') : colors.dark('0.15'),
+        color: variant === "primary" ? isLight ? colors.light('0.15') : colors.dark('0.15') : isLight ? colors.dark('0.15') : colors.light('0.15'),
       }}
       onPress={onPress}>
       {isLoading ? (

@@ -4,5 +4,8 @@ export interface IRootStackParamList {
   Login: undefined;
   Home: undefined;
   Play: undefined;
-  AgainstBot: undefined
+  AgainstBot: undefined;
+  AgainstPlayer: undefined;
+  QuestionMultipleChoice: any;
+  Result: any;
 }

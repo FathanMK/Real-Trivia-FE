@@ -25,6 +25,12 @@ const userSlice = createSlice({
       }
     ),
       builder.addMatcher(
+        userApi.endpoints.getUserById.matchRejected,
+        (state) => {
+          state.token = ""
+        }
+      ),
+      builder.addMatcher(
         userApi.endpoints.checkToken.matchFulfilled,
         (state, { payload }) => {
           state.token = payload.token!
